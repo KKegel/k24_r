@@ -48,12 +48,12 @@ std::array<unsigned char, 3> get_color(unsigned char *bmp_start, int x, int y){
 bool is_inner_pixel(int x, int y){
 
     if(x == 0 || y == 0){
-        return true;
+        return false;
     } else if(x-PHW == -1 || y-PHW == -1){
-        return true;
+        return false;
     }
 
-    return false;
+    return true;
 }
 
 bool is_bottom_stroke(int x, int y){

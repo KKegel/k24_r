@@ -35,8 +35,6 @@ math.h
 -
 array
 -
-random
--
 time.h
 -
 color_corpus.h

@@ -45,3 +45,15 @@ std::array<unsigned char, 3> color_handler::random_color(int seed, int type){
 
     return color;
 }
+
+std::array<unsigned char,  3> color_handler::random_stack_color(){
+
+    return cc.random_stack_color();
+}
+
+bool color_handler::add_to_stack(unsigned char r, unsigned char g, unsigned char b){
+
+    cc.add_to_stack(r, g, b);
+
+    return true;
+}

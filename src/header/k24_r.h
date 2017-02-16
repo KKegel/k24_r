@@ -15,5 +15,6 @@
 #include "../classes/header/color_handler.h"
 
 bool generate(unsigned char *data);
+bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h);
 
 #endif //K24_R_K24_R_H

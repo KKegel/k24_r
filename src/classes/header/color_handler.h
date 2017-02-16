@@ -21,6 +21,9 @@ public:
     bool init();
 
     std::array<unsigned char, 3> random_color(int seed, int type);
+    std::array<unsigned char,  3> random_stack_color();
+
+    bool add_to_stack(unsigned char r, unsigned char g, unsigned char b);
 
 private:
 

@@ -18,14 +18,15 @@ public:
 
     bool init_stack();
 
-    std::array<unsigned char,  3> random_stack_color;
-    std::array<unsigned char,  3> weighted_stack_color;
+    std::array<unsigned char,  3> random_stack_color();
+    std::array<unsigned char,  3> weighted_stack_color();
 
     bool add_to_stack(unsigned char r, unsigned char g, unsigned char b);
 
 private:
 
-    std::vector<std::array<unsigned char, 4>> color_stack; //r,g,b,likelihood
+    std::vector<std::array<unsigned char, 3>> color_stack; //r,g,b
+    std::vector<uint32_t> likelihood;
 
 };
 
