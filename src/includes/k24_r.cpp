@@ -84,7 +84,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                                 color = get_color(data, x + 1, y);
                             } else if (r < 80) {
                                 color = get_color(data, x, y - 1);
-                            } else if (r < 97){
+                            } else if (r < 100 - SCATTERING){
                                 color = get_color(data, x + 1, y - 1);
                             }else{
                                 color = c_h -> random_stack_color();
@@ -104,7 +104,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                                 color = get_color(data, x - 1, y);
                             } else if (r < 80) {
                                 color = get_color(data, x, y - 1);
-                            } else if (r < 97){
+                            } else if (r < 100 - SCATTERING){
                                 color = get_color(data, x - 1, y - 1);
                             }else{
                                 color = c_h -> random_stack_color();
@@ -127,7 +127,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                                 color = get_color(data, x + 1, y);
                             } else if (r < 80) {
                                 color = get_color(data, x, y + 1);
-                            } else if (r < 97){
+                            } else if (r < 100 - SCATTERING){
                                 color = get_color(data, x + 1, y + 1);
                             }else{
                                 color = c_h -> random_stack_color();
@@ -147,7 +147,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                                 color = get_color(data, x - 1, y);
                             } else if (r < 80) {
                                 color = get_color(data, x, y + 1);
-                            } else if (r < 97){
+                            } else if (r < 100 - SCATTERING){
                                 color = get_color(data, x - 1, y + 1);
                             }else{
                                 color = c_h -> random_stack_color();
@@ -162,28 +162,28 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
             }else if(is_bottom_stroke(x,y) && is_left_stroke(x,y)){ //bottom left corner
 
-                if(r < 3){
+                if(r < SCATTERING){
                     color = c_h -> random_stack_color();
                     fill_rect(data, x, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2]);
                 }
 
             }else if(is_bottom_stroke(x,y) && is_right_stroke(x,y)){ //bottom right corner
 
-                if(r < 3){
+                if(r < SCATTERING){
                     color = c_h -> random_stack_color();
                     fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2]);
                 }
 
             }else if(is_top_stroke(x,y) && is_left_stroke(x,y)){ //top left corner
 
-                if(r < 3){
+                if(r < SCATTERING){
                     color = c_h -> random_stack_color();
                     fill_rect(data, x, new_sqare_diff, y - new_sqare_diff +1 , new_sqare_diff, color[0], color[1], color[2]);
                 }
 
             }else if(is_top_stroke(x,y) && is_right_stroke(x,y)){ //top right corner
 
-                if(r < 3){
+                if(r < SCATTERING){
                     color = c_h -> random_stack_color();
                     fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2]);
                 }
@@ -196,7 +196,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                         if(r < 60){
                             color = get_color(data, x, y);
-                        }if(r < 97){
+                        }if(r < 100 - SCATTERING){
                             color = get_color(data, x+1, y);
                         } else{
                             color = c_h -> random_stack_color();
@@ -212,7 +212,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                         if(r < 60){
                             color = get_color(data, x, y);
-                        }if(r < 97){
+                        }if(r < 100 - SCATTERING){
                             color = get_color(data, x-1, y);
                         } else{
                             color = c_h -> random_stack_color();
@@ -232,7 +232,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                         if(r < 60){
                             color = get_color(data, x, y);
-                        }if(r < 97){
+                        }if(r < 100 - SCATTERING){
                             color = get_color(data, x+1, y);
                         }else{
                             color = c_h -> random_stack_color();
@@ -248,7 +248,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                         if(r < 60){
                             color = get_color(data, x, y);
-                        }if(r < 97){
+                        }if(r < 100 - SCATTERING){
                             color = get_color(data, x-1, y);
                         }else{
                             color = c_h -> random_stack_color();
@@ -267,7 +267,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                     if (r < 60) {
                         color = get_color(data, x, y);
                     }
-                    if (r < 97) {
+                    if (r < 100 - SCATTERING) {
                         color = get_color(data, x, y + 1);
                     } else {
                         color = c_h -> random_stack_color();
@@ -280,7 +280,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                     if (r < 60) {
                         color = get_color(data, x, y);
                     }
-                    if (r < 97) {
+                    if (r < 100 - SCATTERING) {
                         color = get_color(data, x, y - 1);
                     } else {
                         color = c_h -> random_stack_color();
@@ -297,7 +297,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                     if (r < 60) {
                         color = get_color(data, x, y);
                     }
-                    if (r < 97) {
+                    if (r < 100 - SCATTERING) {
                         color = get_color(data, x, y + 1);
                     } else {
                         color = c_h -> random_stack_color();
@@ -310,7 +310,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                     if (r < 60) {
                         color = get_color(data, x, y);
                     }
-                    if (r < 97) {
+                    if (r < 100 - SCATTERING) {
                         color = get_color(data, x, y - 1);
                     } else {
                         color = c_h -> random_stack_color();

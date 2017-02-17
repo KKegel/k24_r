@@ -7,7 +7,9 @@
 
 #include <profile.h>
 
-const static int PHW = 1024;
+const static int PHW = 8192;
+
+const static int SCATTERING = 2;
 
 const static int BLACK = 0;
 const static int WHITE = 1;

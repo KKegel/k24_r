@@ -5,19 +5,18 @@
 #include "header/bmp_edit.h"
 #include "header/k24_r.h"
 
-//const int PHW = 1024; //hex:
 
 const unsigned char bftype[2] =     {0x42, 0x4d};               //key (fixed)
-const unsigned char bfsize[4] =     {0x36, 0x00, 0x30, 0x00};   //file size (Byte)
+const unsigned char bfsize[4] =     {0x36, 0x00, 0x00, 0x0c};   //file size (Byte)
 const unsigned char bfReserved[4] = {0x00, 0x00, 0x00, 0x00};   //reserved
 const unsigned char bfOffBits[4] =  {0x36, 0x00, 0x00, 0x00};   //offset (default)
 const unsigned char biSize[4] =     {0x28, 0x00, 0x00, 0x00};   //info size (default)
-const unsigned char biWidth[4] =    {0x00, 0x04, 0x00, 0x00};   //image width
-const unsigned char biHeight[4] =   {0x00, 0x04, 0x00, 0x00};   //image height
+const unsigned char biWidth[4] =    {0x00, 0x20, 0x00, 0x00};   //image width
+const unsigned char biHeight[4] =   {0x00, 0x20, 0x00, 0x00};   //image height
 const unsigned char biPlanes[2] =   {0x01, 0x00};               //default
 const unsigned char biBitCount[2] = {0x18, 0x00};               //color system (24rgb)
 const unsigned char biCompress[4] = {0x00, 0x00, 0x00, 0x00};   //default
-const unsigned char biSizeImag[4] = {0x00, 0x00, 0x30, 0x00};   //size data block (Byte)
+const unsigned char biSizeImag[4] = {0x00, 0x00, 0x00, 0x0c};   //size data block (Byte)
 const unsigned char biXPPM[4] =     {0x00, 0x00, 0x00, 0x00};   //default
 const unsigned char biYPPM[4] =     {0x00, 0x00, 0x00, 0x00};   //default
 const unsigned char biClrUsed[4] =  {0x00, 0x00, 0x00, 0x00};   //default
@@ -48,7 +47,7 @@ int main() {
 
     std::srand(time(0));
 
-    for(int i = 0; i < 1; i++) {
+    for(int i = 0; i < 15; i++) {
 
         generate(&data[0]);
 
@@ -57,7 +56,7 @@ int main() {
         long double millisec = microseconds * 0.001;
         std::cout << millisec << " ms" << std::endl;
 
-        std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUT" +std::to_string(i) + ".bmp";
+        std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUThighRes" +std::to_string(i) + ".bmp";
 
         FILE *bmp_file = fopen(f_name.c_str(), "wb");
 
