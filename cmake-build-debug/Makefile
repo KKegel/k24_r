@@ -231,6 +231,33 @@ src/includes/k24_r.cpp.s:
 	$(MAKE) -f CMakeFiles/k24_r.dir/build.make CMakeFiles/k24_r.dir/src/includes/k24_r.cpp.s
 .PHONY : src/includes/k24_r.cpp.s
 
+src/includes/pixel_operations.o: src/includes/pixel_operations.cpp.o
+
+.PHONY : src/includes/pixel_operations.o
+
+# target to build an object file
+src/includes/pixel_operations.cpp.o:
+	$(MAKE) -f CMakeFiles/k24_r.dir/build.make CMakeFiles/k24_r.dir/src/includes/pixel_operations.cpp.o
+.PHONY : src/includes/pixel_operations.cpp.o
+
+src/includes/pixel_operations.i: src/includes/pixel_operations.cpp.i
+
+.PHONY : src/includes/pixel_operations.i
+
+# target to preprocess a source file
+src/includes/pixel_operations.cpp.i:
+	$(MAKE) -f CMakeFiles/k24_r.dir/build.make CMakeFiles/k24_r.dir/src/includes/pixel_operations.cpp.i
+.PHONY : src/includes/pixel_operations.cpp.i
+
+src/includes/pixel_operations.s: src/includes/pixel_operations.cpp.s
+
+.PHONY : src/includes/pixel_operations.s
+
+# target to generate assembly for a file
+src/includes/pixel_operations.cpp.s:
+	$(MAKE) -f CMakeFiles/k24_r.dir/build.make CMakeFiles/k24_r.dir/src/includes/pixel_operations.cpp.s
+.PHONY : src/includes/pixel_operations.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -279,6 +306,9 @@ help:
 	@echo "... src/includes/k24_r.o"
 	@echo "... src/includes/k24_r.i"
 	@echo "... src/includes/k24_r.s"
+	@echo "... src/includes/pixel_operations.o"
+	@echo "... src/includes/pixel_operations.i"
+	@echo "... src/includes/pixel_operations.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

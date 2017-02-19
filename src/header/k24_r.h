@@ -9,12 +9,13 @@
 #include <array>
 #include <time.h>
 
-#include "values.h"
+#include "../classes/header/values.h"
 #include "bmp_edit.h"
+#include "pixel_operations.h"
 
 #include "../classes/header/color_handler.h"
 
 bool generate(unsigned char *data);
-bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h);
+
 
 #endif //K24_R_K24_R_H

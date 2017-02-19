@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/karlkegel/CLionProjects/k24_r/src/classes/color_handler.cpp" "/Users/karlkegel/CLionProjects/k24_r/cmake-build-debug/CMakeFiles/k24_r.dir/src/classes/color_handler.cpp.o"
   "/Users/karlkegel/CLionProjects/k24_r/src/includes/bmp_edit.cpp" "/Users/karlkegel/CLionProjects/k24_r/cmake-build-debug/CMakeFiles/k24_r.dir/src/includes/bmp_edit.cpp.o"
   "/Users/karlkegel/CLionProjects/k24_r/src/includes/k24_r.cpp" "/Users/karlkegel/CLionProjects/k24_r/cmake-build-debug/CMakeFiles/k24_r.dir/src/includes/k24_r.cpp.o"
+  "/Users/karlkegel/CLionProjects/k24_r/src/includes/pixel_operations.cpp" "/Users/karlkegel/CLionProjects/k24_r/cmake-build-debug/CMakeFiles/k24_r.dir/src/includes/pixel_operations.cpp.o"
   "/Users/karlkegel/CLionProjects/k24_r/src/main.cpp" "/Users/karlkegel/CLionProjects/k24_r/cmake-build-debug/CMakeFiles/k24_r.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
