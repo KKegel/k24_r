@@ -48,7 +48,7 @@ int main() {
 
     std::srand(time(0));
 
-    for(int i = 11; i < 12; i++) {
+    for(int i = 13; i < 14; i++) {
 
         generate(&data[0]);
 

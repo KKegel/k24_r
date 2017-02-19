@@ -62,7 +62,7 @@ bool generate(unsigned char *data){
 
     int i = 0;
 
-    while (i < 0) {
+    while (i < 50) {
 
         std::cout << "smoth x & y lines - revision: " << i << std::endl;
 
