@@ -350,8 +350,6 @@ bool remove_single_dots(unsigned char *data, color_handler *c_h, values v){
 
 bool smoth_x(unsigned char *data, color_handler *c_h, values v){
 
-    std::cout << "smoth x ... " << std::flush;
-
     std::array<unsigned char, 3> left_color;
     std::array<unsigned char, 3> right_color;
 
@@ -379,14 +377,10 @@ bool smoth_x(unsigned char *data, color_handler *c_h, values v){
 
     }
 
-    std::cout << "finished" << std::endl;
-
     return true;
 }
 
 bool smoth_y(unsigned char *data, color_handler *c_h, values v){
-
-    std::cout << "smoth y ... " << std::flush;
 
     std::array<unsigned char, 3> top_color;
     std::array<unsigned char, 3> bottom_color;
@@ -415,14 +409,198 @@ bool smoth_y(unsigned char *data, color_handler *c_h, values v){
 
     }
 
-    std::cout << "finished" << std::endl;
+    return true;
+}
+
+bool manipulate_brightness(unsigned char *data, int bottom_color_av, int top_color_av, int bright_plus, values v){
+
+    bool is_max = (bright_plus == v.MAX);
+    bool is_min = (bright_plus == v.MIN);
+
+    int sum;
+
+    if(is_max) {
+
+        for (int y = 0; y < v.PHW; y++) {
+
+            for (int x = 0; x < v.PHW; x++) {
+
+                sum = *data;
+                sum += *(data + 1);
+                sum += *(data + 2);
+                sum /= 3;
+
+                if ((sum >= bottom_color_av) && (sum <= top_color_av)) {
+
+                    *data = 0xff;
+                    data++;
+                    *data = 0xff;
+                    data++;
+                    *data = 0xff;
+                    data++;
+
+                }else{
+                    data += 3;
+                }
+            }
+        }
+
+    }else if(is_min){
+
+        for (int y = 0; y < v.PHW; y++) {
+
+            for (int x = 0; x < v.PHW; x) {
+
+                sum = *data;
+                sum += *(data + 1);
+                sum += *(data + 2);
+                sum /= 3;
+
+                if ((sum >= bottom_color_av) && (sum <= top_color_av)) {
+
+                    *data = 0x00;
+                    data++;
+                    *data = 0x00;
+                    data++;
+                    *data = 0x00;
+                    data++;
+
+                }else{
+                    data += 3;
+                }
+            }
+        }
+
+    }else{
+
+        for (int y = 0; y < v.PHW; y++) {
+
+            for (int x = 0; x < v.PHW; x++) {
+
+                sum = *data;
+                sum += *(data + 1);
+                sum += *(data + 2);
+                sum /= 3;
+
+                if ((sum >= bottom_color_av) && (sum <= top_color_av)) {
+
+                    int i = 0;
+
+                    while (i < 3) {
+
+                        if (*data + bright_plus >= 0x00) {
+
+                            if (*data + bright_plus <= 0xff) {
+
+                                *data += bright_plus;
+
+                            } else {
+                                *data = 0xff;
+                            }
+                        } else {
+                            *data = 0x00;
+                        }
+
+                        data++;
+                        i++;
+                    }
+
+                }else{
+                    data += 3;
+                }
+            }
+        }
+
+    }
 
     return true;
 }
 
+bool scale_brightness(unsigned char *data, int p_r, int p_g, int p_b, color_handler *c_h, values v){
 
+    for(int y = 0; y < v.PHW; y++){
 
+        for(int x = 0; x < v.PHW; x++){
 
+            c_h -> scale_color(data, x, y, p_r, p_g, p_b);
+            data += 3;
+
+        }
+    }
+
+    return true;
+}
+
+bool clean_colors(unsigned char *data, int firs, int sec, int third, int tol, color_handler *c_h, values v){
+
+    std::array<unsigned char, 3> col;
+    int av;
+    bool is_cleanable;
+
+    for(int y = 0; y < v.PHW; y++){
+
+        for(int x = 0; x < v.PHW; x++) {
+
+            col = get_color(data, x, y, v);
+            av = (col[0] + col[1] + col[2]) / 3;
+            is_cleanable = true;
+
+            if((col[0] - av > 0 && col[0] - av < tol) || (av - col[0] > 0 && av - col[0] < tol)){
+                if((col[1] - av > 0 && col[1] - av < tol) || (av - col[1] > 0 && av - col[1] < tol)){
+                    if((col[2] - av > 0 && col[2] - av < tol) || (av - col[2] > 0 && av - col[2] < tol)){
+
+                        is_cleanable = false;
+
+                    }
+                }
+            }
+
+            if(is_cleanable){
+
+                if(col[0] >= col [1]){
+
+                    if(col[1] >= col[2]){ //0-1-2
+
+                        c_h -> scale_color(data, x, y, firs, sec, third);
+
+                    }else if(col[2] >= col[1]){ //0-2-1
+
+                        c_h -> scale_color(data, x, y, firs, third, sec);
+
+                    }else if(col[2] >= col[0]){ //2-0-1
+
+                        c_h -> scale_color(data, x, y, third, firs, sec);
+
+                    }
+
+                }else if(col[1] >= col[0]){
+
+                    if(col[0] >= col[2]){ //1-0-2
+
+                        c_h -> scale_color(data, x, y, sec, firs, third);
+
+                    }else if(col[2] >= col[0]){ //1-2-0
+
+                        c_h -> scale_color(data, x, y, sec, third, firs);
+
+                    }else if(col[2] >= col[1]){ //2-1-0
+
+                        c_h -> scale_color(data, x, y, third, sec, firs);
+
+                    }
+
+                }
+
+            }
+
+            data += 3;
+
+        }
+
+    }
+
+    return  true;
+}
 
 
 

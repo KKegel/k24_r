@@ -29,6 +29,10 @@ public:
     static std::array<unsigned char, 3> mix_colors(std::array<unsigned char, 3> c1, std::array<unsigned char, 3> c2,
                                                    int amount_c1, int amount_c2);
 
+    int brightness_average(unsigned char *data);
+    int max_bright_pix_average(unsigned char *data);
+    bool scale_color(unsigned char *data, int x, int y, int fac_r, int fac_g, int fac_b);
+
 private:
 
     color_corpus cc;

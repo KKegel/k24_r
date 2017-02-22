@@ -48,11 +48,15 @@ int main() {
 
     std::srand(time(0));
 
-    for(int i = 13; i < 14; i++) {
 
-        generate(&data[0]);
+    int mi = 8;
 
-        std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUThighRes" +std::to_string(i) + ".bmp";
+    for(int i = 3; i < 13; i++) {
+
+        generate(&data[0], mi);
+
+        std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUThighRes" + std::to_string(mi) /*std::to_string(i)*/ + ".bmp";
+        mi += 8;
 
         std::cout << "writing file: " << f_name << std::endl;
 
@@ -72,9 +76,12 @@ int main() {
         auto elapsed = std::chrono::high_resolution_clock::now() - start;
         long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
         long double millisec = microseconds * 0.001;
-        std::cout << millisec << " ms" << std::endl;
+
+        std::cout << "\nexecution time = " << millisec << " ms" << std::endl;
 
     }
+
+    std::cout << "k24_r finished" << std::endl;
 
     return 0;
 

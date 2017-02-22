@@ -20,6 +20,8 @@ const int WHITE = 1;
 const int GREY = 2;
 const int COLOR = 3;
 
+const int MAX = 1001;
+const int MIN = 1002;
 
 };
 

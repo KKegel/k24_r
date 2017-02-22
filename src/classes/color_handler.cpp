@@ -76,3 +76,144 @@ bool color_handler::compare_colors(std::array<unsigned char, 3> c1, std::array<u
     return ((c1[0] == c2[0]) && (c1[1] == c2[1]) && (c1[2] == c2[2]));
 }
 
+int color_handler::brightness_average(unsigned char *data){
+
+    int b_a = 0;
+    std::array<std::array<int, 3>, 8192> line_vals;
+
+    for (int y = 0; y < v->PHW; y++){
+
+        line_vals[y][0] = 0;
+        line_vals[y][1] = 0;
+        line_vals[y][2] = 0;
+
+        for(int x = 0; x < (v->PHW*3); x += 3){
+
+            line_vals[y][0] += *data;
+            data++;
+            line_vals[y][1] += *data;
+            data++;
+            line_vals[y][2] += *data;
+            data++;
+
+        }
+
+        line_vals[y][0] /= v->PHW;
+        line_vals[y][1] /= v->PHW;
+        line_vals[y][2] /= v->PHW;
+
+    }
+
+    int a_r = 0;
+    int a_g = 0;
+    int a_b = 0;
+
+    for(int i = 0; i < v->PHW; i++){
+
+        a_r += line_vals[i][0];
+        a_g += line_vals[i][1];
+        a_b += line_vals[i][2];
+
+    }
+
+    a_r /= v->PHW;
+    a_g /= v->PHW;
+    a_b /= v->PHW;
+
+    b_a = (a_r + a_g + a_b) / 3;
+
+    return b_a;
+}
+
+int color_handler::max_bright_pix_average(unsigned char *data){
+
+    int max = 0;
+    int curr;
+
+    for(int y = 0; y < v->PHW; y++){
+
+        for(int x = 0; x < v->PHW; x++){
+
+            curr = *data;
+            data++;
+            curr += *data;
+            data++;
+            curr += *data;
+            data++;
+
+            curr /= 3;
+
+            if(curr > max){
+
+                max = curr;
+
+                if(max == 0xff){
+                    break;
+                }
+
+            }
+        }
+
+        if(max == 0xff){
+            break;
+        }
+
+    }
+
+    return max;
+}
+
+bool scale_color(unsigned char *data, int x, int y, int fac_r, int fac_g, int fac_b){
+
+    if((*data * (100 + fac_r)) / 100 <= 0xff) {
+
+        if((*data * (100 + fac_r)) / 100 >= 0x00){
+
+            *data = (*data * (100 + fac_r)) / 100;
+
+        }else{
+            *data = 0x00;
+        }
+
+    }else{
+        *data = 0xff;
+    }
+    data++;
+
+    if((*data * (100 + fac_g)) / 100 <= 0xff) {
+
+        if((*data * (100 + fac_g)) / 100 >= 0x00){
+
+            *data = (*data * (100 + fac_g)) / 100;
+
+        }else{
+            *data = 0x00;
+        }
+
+    }else{
+        *data = 0xff;
+    }
+    data++;
+
+    if((*data * (100 + fac_b)) / 100 <= 0xff) {
+
+        if((*data * (100 + fac_b)) / 100 >= 0x00){
+
+            *data = (*data * (100 + fac_b)) / 100;
+
+        }else{
+            *data = 0x00;
+        }
+
+    }else{
+        *data = 0xff;
+    }
+    data++;
+
+}
+
+
+
+
+
+
