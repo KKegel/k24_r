@@ -44,44 +44,60 @@ values v;
 
 int main() {
 
-    auto start = std::chrono::high_resolution_clock::now();
+    for(int i = 0; i < 1; i++) {
 
-    std::srand(time(0));
+        std::cout << "... set gen. seed" << std::endl;
+        std::srand(time(0));
 
+        std::cout << "... start timer" << std::endl;
+        auto start = std::chrono::high_resolution_clock::now();
 
-    int mi = 8;
+        std::cout << "... init. filename ... " << std::flush;
+        int key = 0;
 
-    for(int i = 3; i < 13; i++) {
+        int n = 0;
+        while(n < 1500){
+            key = std::rand();
+            n++;
+        }
 
-        generate(&data[0], mi);
+        std::cout << "name id = " << std::to_string(key) << std::endl;
 
-        std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUThighRes" + std::to_string(mi) /*std::to_string(i)*/ + ".bmp";
-        mi += 8;
+        std::cout << "\n... start algorithm\n" << std::endl;
+        int reps = generate(&data[0]);
 
-        std::cout << "writing file: " << f_name << std::endl;
+        std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUT-" + std::to_string(key) + "_" + std::to_string(reps) + ".bmp";
+        std::cout << "writing bitmap: " << f_name << std::endl;
 
+        std::cout << "open file stream" << std::endl;
         FILE *bmp_file = fopen(f_name.c_str(), "wb");
 
-        for (int i = 0; i < 54; i++) {
-            putc(head[i], bmp_file);
+        std::cout << "write header ... " << std::flush;
+        for (int j = 0; j < 54; j++) {
+            putc(head[j], bmp_file);
         }
+        std::cout << " finished" << std::endl;
 
-        for (int i = 0; i < (v.PHW * v.PHW * 3); i++) {
-
-            putc(data[i], bmp_file);
+        std::cout << "write data bytes ... " << std::flush;
+        for (int j = 0; j < (v.PHW * v.PHW * 3); j++) {
+            putc(data[j], bmp_file);
         }
+        std::cout << " finished" << std::endl;
 
+        std::cout << "close file stream" << std::endl;
         fclose(bmp_file);
+
+        std::cout << "\nstop timer" << std::endl;
 
         auto elapsed = std::chrono::high_resolution_clock::now() - start;
         long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
         long double millisec = microseconds * 0.001;
 
-        std::cout << "\nexecution time = " << millisec << " ms" << std::endl;
+        std::cout << "execution time = " << millisec << " ms" << std::endl;
 
     }
 
-    std::cout << "k24_r finished" << std::endl;
+    std::cout << "...k24_r finished" << std::endl;
 
     return 0;
 

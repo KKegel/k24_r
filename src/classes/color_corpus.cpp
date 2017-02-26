@@ -6,38 +6,89 @@
 
 bool color_corpus::init_stack() {
 
+    color_stack.push_back({0xff, 0xff, 0xff});
+    likelihood.push_back(1);
+
     return true;
 }
 
-bool color_corpus::add_to_stack(unsigned char r, unsigned char g, unsigned char b){
+bool color_corpus::clear_stack(){
+
+    color_stack.clear();
+    likelihood.clear();
+
+    init_stack();
+
+    return true;
+}
+
+bool color_corpus::add_to_stack(unsigned char r, unsigned char g, unsigned char b) {
 
     bool found = false;
+    int f_pos = 0;
 
-    for(int i = 0; i < color_stack.size(); i++){
+    int top = color_stack.size()-1;
+    int down = 0;
 
-        for(int k = 0; k < 4; k++){
+    int icenter;
 
-            if(k == 0 && color_stack[i][k] != r){
+    unsigned char searched = r;
+    int searched_idx = 0;
+
+    while (1) {
+
+        icenter = down + ((top - down) / 2);
+        f_pos = icenter;
+
+        if (color_stack[icenter][searched_idx] == searched) {
+
+            if (searched_idx == 2) {
+
+                found = true;
                 break;
-            }
-            if(k == 1 && color_stack[i][k] != g){
-                break;
-            }
-            if(k == 2 && color_stack[i][k] != b){
-                break;
+
+            } else {
+
+                top = icenter;
+                down = icenter;
+
+                while (color_stack.size()-1 > top+1 && color_stack[top+1][searched_idx] == searched) {
+                    top++;
+                }
+                while (down - 1 >= 0 && color_stack[down - 1][searched_idx] == searched) {
+                    down--;
+                }
+
+                if (searched_idx == 0) {
+                    searched = g;
+                } else {
+                    searched = b;
+                }
+
+                searched_idx++;
+
             }
 
-            likelihood[i] = likelihood[i] + 1;
-            found = true;
-        }
+        } else if (top - down <= 0){
 
-        if(found){
-            found = true;
             break;
+
+        }else if (searched <= color_stack[icenter][searched_idx]) {
+
+            top = icenter - 1;
+
+        } else {
+            down = icenter + 1;
         }
+
     }
 
-    if(!found){
+
+    if(found){
+
+        likelihood[f_pos]++;
+
+    }else{
 
         std::array<unsigned char, 3> color;
 
@@ -45,8 +96,8 @@ bool color_corpus::add_to_stack(unsigned char r, unsigned char g, unsigned char 
         color[1] = g;
         color[2] = b;
 
-        color_stack.push_back(color);
-        likelihood.push_back(1);
+        color_stack.insert(color_stack.begin()+f_pos, color);
+        likelihood.insert(likelihood.begin()+f_pos, 1);
 
     }
 
@@ -58,4 +109,41 @@ std::array<unsigned char,  3> color_corpus::random_stack_color(){
     int i = std::rand() % color_stack.size();
 
     return color_stack[i];
+}
+
+std::vector<std::array<unsigned char, 6>> color_corpus::colors_by_likelihood(int down, int up){
+
+    std::vector<std::array<unsigned char, 6>> colors;
+    std::array<unsigned char, 6> col;
+
+    int k = 0;
+    int m_size = likelihood.size() - 1;
+
+    for(int i = 0; i < likelihood.size(); i++){
+
+        int lkhd = likelihood[i];
+
+        if(lkhd >= down && lkhd <= up){
+
+            col[0] = color_stack[i][0];
+            col[1] = color_stack[i][1];
+            col[2] = color_stack[i][2];
+
+            k = i;
+
+            while(k < m_size && likelihood[k] < up){
+                k++;
+            }
+
+            col[3] = color_stack[k][0];
+            col[4] = color_stack[k][1];
+            col[5] = color_stack[k][2];
+
+            colors.push_back(col);
+
+        }
+
+    }
+
+    return colors;
 }

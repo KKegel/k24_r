@@ -4,7 +4,7 @@
 
 #include "../header/k24_r.h"
 
-bool generate(unsigned char *data, int mi){
+int generate(unsigned char *data){
 
     color_handler c_h;
     values v;
@@ -16,15 +16,17 @@ bool generate(unsigned char *data, int mi){
 
     //4x4 base pattern:
 
+    std::cout << "generate base pattern ... " << std::flush;
+
     for(int y = 0; y < 4; y++){
         for(int x = 0; x < 4; x++){
 
             int r = std::rand() % 20;
             if( r < 2){
                 color = c_h.random_color(seed, v.BLACK);
-            }else if( r < 10){
+            }else if( r < 7){
                 color = c_h.random_color(seed, v.WHITE);
-            }else if( r < 11){
+            }else if( r < 9){
                 color = c_h.random_color(seed, v.GREY);
             }else {
                 color = c_h.random_color(seed, v.COLOR);
@@ -34,6 +36,8 @@ bool generate(unsigned char *data, int mi){
             c_h.add_to_stack(color[0], color[1], color[2]);
         }
     }
+
+    std::cout << "finished" << std::endl;
 
     //split pattern:
 
@@ -48,11 +52,11 @@ bool generate(unsigned char *data, int mi){
 
             //smooth
 
-            std::cout << "smoth x ... " << std::flush;
+            std::cout << "transform x ... " << std::flush;
             smoth_x(data, &c_h, v);
             std::cout << "finished" << std::endl;
 
-            std::cout << "smoth y ... " << std::flush;
+            std::cout << "transform y ... " << std::flush;
             smoth_y(data, &c_h, v);
             std::cout << "finished" << std::endl;
 
@@ -68,16 +72,18 @@ bool generate(unsigned char *data, int mi){
     //smoth again
 
     int i = 0;
+    int reps = rand() % 75;
+    std::cout << "repetitions: " << reps << std::endl;
 
-    while (i < 75) { //default 75
+    while (i < reps) {
 
-        std::cout << "smoth x & y lines - revision: " << i << std::endl;
+        std::cout << "transform x & y lines - revision: " << i << " of " << reps << std::endl;
 
-        std::cout << "smoth x ... " << std::flush;
+        std::cout << "start transform x ... " << std::flush;
         smoth_x(data, &c_h, v);
         std::cout << "finished" << std::endl;
 
-        std::cout << "smoth y ... " << std::flush;
+        std::cout << "start transform y ... " << std::flush;
         smoth_y(data, &c_h, v);
         std::cout << "finished" << std::endl;
 
@@ -94,15 +100,24 @@ bool generate(unsigned char *data, int mi){
     int max_color = c_h.max_bright_pix_average(data);
     std::cout << "average = " << max_color << " ... finished" << std::endl;
 
-    std::cout << "scale brightness ... " << std::flush;
-    scale_brightness(data, 20, 20, 20, &c_h, v);
+    std::cout << "transform brightness ... " << std::flush;
+    scale_brightness(data, 50, 50, 50, &c_h, v);
     std::cout << "finished" << std::endl;
 
-    std::cout << "clean colors ... " << std::flush;
+    std::cout << "transform colors ... " << std::flush;
     clean_colors(data, 20, 15, -35, 20, &c_h, v);
     std::cout << "finished" << std::endl;
 
-    return true;
-}
+    std::cout << "clear stack" << std::endl;
+    c_h.clear_stack();
 
+    std::cout << "rebuild stack" << std::endl;
+    c_h.index(data);
+
+    std::cout << "start rcdbl subroutine ... " << std::endl;
+    replace_colors(data, c_h.get_colors_by_likelihood(0, (10000/reps*5)), &c_h, v);
+    std::cout << "... completed" << std::endl;
+
+    return reps;
+}
 

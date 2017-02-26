@@ -1,0 +1,3 @@
+/Users/karlkegel/CLionProjects/k24_r/cmake-build-release/CMakeFiles/edit_cache.dir
+/Users/karlkegel/CLionProjects/k24_r/cmake-build-release/CMakeFiles/rebuild_cache.dir
+/Users/karlkegel/CLionProjects/k24_r/cmake-build-release/CMakeFiles/k24_r.dir

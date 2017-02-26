@@ -13,6 +13,7 @@
 
 #include "color_corpus.h"
 #include "values.h"
+#include "../../header/bmp_edit.h"
 
 class color_handler {
 
@@ -24,10 +25,14 @@ public:
     std::array<unsigned char,  3> random_stack_color();
 
     bool add_to_stack(unsigned char r, unsigned char g, unsigned char b);
+    bool clear_stack();
+    bool index(unsigned char *data);
 
     static bool compare_colors(std::array<unsigned char, 3> c1, std::array<unsigned char, 3> c2);
     static std::array<unsigned char, 3> mix_colors(std::array<unsigned char, 3> c1, std::array<unsigned char, 3> c2,
                                                    int amount_c1, int amount_c2);
+
+    std::vector<std::array<unsigned char, 6>> get_colors_by_likelihood(int down, int top);
 
     int brightness_average(unsigned char *data);
     int max_bright_pix_average(unsigned char *data);

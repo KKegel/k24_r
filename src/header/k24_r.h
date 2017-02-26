@@ -15,7 +15,7 @@
 
 #include "../classes/header/color_handler.h"
 
-bool generate(unsigned char *data, int mi);
+int generate(unsigned char *data);
 
 
 #endif //K24_R_K24_R_H

@@ -12,6 +12,36 @@ bool color_handler::init(values *val){
     return true;
 }
 
+bool color_handler::clear_stack() {
+
+    cc.clear_stack();
+
+    return true;
+}
+
+bool color_handler::index(unsigned char *data){
+
+    std::array<unsigned char, 3> color;
+
+    std::cout << "y: " << 0 << " of " << (v->PHW - 1) << std::flush;
+
+    for(int y = 0; y < v->PHW; y++){
+
+        std::cout << "\ry: " << y << " of " << (v->PHW - 1) << std::flush;
+
+        for(int x = 0; x < v->PHW; x++){
+
+            color = get_color(data, x, y, *v);
+            cc.add_to_stack(color[0], color[1], color[2]);
+
+        }
+    }
+
+    std::cout << " ... finished" << std::endl;
+
+    return true;
+}
+
 std::array<unsigned char, 3> color_handler::random_color(int seed, int type){
 
     std::array<unsigned char, 3> color;
@@ -163,7 +193,7 @@ int color_handler::max_bright_pix_average(unsigned char *data){
     return max;
 }
 
-bool scale_color(unsigned char *data, int x, int y, int fac_r, int fac_g, int fac_b){
+bool color_handler::scale_color(unsigned char *data, int x, int y, int fac_r, int fac_g, int fac_b){
 
     if((*data * (100 + fac_r)) / 100 <= 0xff) {
 
@@ -208,9 +238,17 @@ bool scale_color(unsigned char *data, int x, int y, int fac_r, int fac_g, int fa
     }else{
         *data = 0xff;
     }
-    data++;
 
+    return true;
 }
+
+std::vector<std::array<unsigned char, 6>> color_handler::get_colors_by_likelihood(int down, int top) {
+
+    return cc.colors_by_likelihood(down, top);
+}
+
+
+
 
 
 

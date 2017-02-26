@@ -24,4 +24,6 @@ bool manipulate_brightness(unsigned char *data, int bottom_color_av, int top_col
 bool scale_brightness(unsigned char *data, int p_r, int p_g, int p_b, color_handler *c_h, values v);
 bool clean_colors(unsigned char *data, int firs, int sec, int third, int tol, color_handler *c_h, values v);
 
+bool replace_colors(unsigned char *data, std::vector<std::array<unsigned char, 6>> colors, color_handler *c_h, values v);
+
 #endif //K24_R_PIXEL_OPERATIONS_H

@@ -11,14 +11,15 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
     int new_resolution = resolution * 2;
     std::array<unsigned char, 3> color;
 
-    std::cout << "calculationg resolution " << new_resolution << std::endl;
-    std::cout << "y: " << 0 << "|" << v.PHW << std::flush;
+    std::cout << "calculate resolution with res. factor " << new_resolution << std::endl;
+    std::cout << "y: " << 0 << " of " << (v.PHW - 1) << std::flush;
 
+    int max_ind = 64;
     int y = 0;
 
     while(y < v.PHW){
 
-        std::cout << "\ry: " << y+1 << "|" << v.PHW << std::flush;
+        std::cout << "\ry: " << y+1 << "|" << (v.PHW - 1) << std::flush;
 
         for(int x = 0; x < v.PHW; x += (square_corner_diff - 1)){
 
@@ -47,7 +48,10 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                             fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
                             x++;
-                            c_h -> add_to_stack(color[0], color[1], color[2]);
+
+                            if(new_resolution < max_ind) {
+                                c_h->add_to_stack(color[0], color[1], color[2]);
+                            }
 
                         } else { //left corner
 
@@ -90,7 +94,10 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                             fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2],v);
                             x++;
-                            c_h -> add_to_stack(color[0], color[1], color[2]);
+
+                            if(new_resolution < max_ind) {
+                                c_h->add_to_stack(color[0], color[1], color[2]);
+                            }
 
                         } else { //left corner
 
@@ -159,7 +166,10 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                         fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
                         x++;
-                        c_h -> add_to_stack(color[0], color[1], color[2]);
+
+                        if(new_resolution < max_ind) {
+                            c_h->add_to_stack(color[0], color[1], color[2]);
+                        }
 
                     }else{ //left
 
@@ -195,7 +205,10 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                         fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2],v);
                         x++;
-                        c_h -> add_to_stack(color[0], color[1], color[2]);
+
+                        if(new_resolution < max_ind) {
+                            c_h->add_to_stack(color[0], color[1], color[2]);
+                        }
 
                     }else{ //left
 
@@ -277,7 +290,9 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
             }
 
-            c_h -> add_to_stack(color[0], color[1], color[2]);
+            if(new_resolution < max_ind) {
+                c_h->add_to_stack(color[0], color[1], color[2]);
+            }
 
         }
 
@@ -449,7 +464,7 @@ bool manipulate_brightness(unsigned char *data, int bottom_color_av, int top_col
 
         for (int y = 0; y < v.PHW; y++) {
 
-            for (int x = 0; x < v.PHW; x) {
+            for (int x = 0; x < v.PHW; x++) {
 
                 sum = *data;
                 sum += *(data + 1);
@@ -593,8 +608,6 @@ bool clean_colors(unsigned char *data, int firs, int sec, int third, int tol, co
 
             }
 
-            data += 3;
-
         }
 
     }
@@ -602,6 +615,106 @@ bool clean_colors(unsigned char *data, int firs, int sec, int third, int tol, co
     return  true;
 }
 
+bool replace_colors(unsigned char *data, std::vector<std::array<unsigned char, 6>> colors, color_handler *c_h, values v){
+
+    std::array<unsigned char, 3> curr_color;
+    unsigned char *odata = data;
+    int s = colors.size();
+
+
+    std::cout << "y: " << 0 << " of " << (v.PHW - 1) << std::flush;
+
+    for(int y = 0;  y < v.PHW; y++){
+
+        std::cout << "\ry: " << y << " of " << (v.PHW - 1) << std::flush;
+
+        for(int x = 0; x < v.PHW; x++){
+
+            curr_color = get_color(odata, x, y, v);
+
+            unsigned char r = curr_color[0];
+            unsigned char g = curr_color[1];
+            unsigned char b = curr_color[2];
+
+            bool found = false;
+            int f_pos = 0;
+
+            int top = colors.size()-1;
+            int down = 0;
+
+            int icenter;
+
+            unsigned char searched = r;
+            int searched_idx = 0;
+
+            while (1) {
+
+                icenter = down + ((top - down) / 2);
+                f_pos = icenter;
+
+                if (colors[icenter][searched_idx] == searched) {
+
+                    if (searched_idx == 2) {
+
+                        found = true;
+                        break;
+
+                    } else {
+
+                        top = icenter;
+                        down = icenter;
+
+                        while (colors[top+1][searched_idx] == searched) {
+                            top++;
+                        }
+                        while (colors[down - 1][searched_idx] == searched) {
+                            down--;
+                        }
+
+                        if (searched_idx == 0) {
+                            searched = g;
+                        } else {
+                            searched = b;
+                        }
+
+                        searched_idx++;
+
+                    }
+
+                } else if (top - down <= 0){
+
+                    break;
+
+                }else if (searched <= colors[icenter][searched_idx]) {
+
+                    top = icenter - 1;
+
+                } else {
+                    down = icenter + 1;
+                }
+
+            }
+
+            if(found){
+
+                *data = colors[f_pos][3];
+                data++;
+                *data = colors[f_pos][4];
+                data++;
+                *data = colors[f_pos][4];
+                data++;
+
+            }else{
+                data += 3;
+            }
+
+        }
+    }
+
+    std::cout << " ... finished" << std::endl;
+
+    return true;
+}
 
 
 
