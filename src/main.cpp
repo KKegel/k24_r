@@ -46,13 +46,13 @@ int main() {
 
     for(int i = 0; i < 1; i++) {
 
-        std::cout << "... set gen. seed" << std::endl;
+        std::cout << "...set generator seed" << std::endl;
         std::srand(time(0));
 
-        std::cout << "... start timer" << std::endl;
+        std::cout << "...start timer" << std::endl;
         auto start = std::chrono::high_resolution_clock::now();
 
-        std::cout << "... init. filename ... " << std::flush;
+        std::cout << "...init filename - " << std::flush;
         int key = 0;
 
         int n = 0;
@@ -63,7 +63,6 @@ int main() {
 
         std::cout << "name id = " << std::to_string(key) << std::endl;
 
-        std::cout << "\n... start algorithm\n" << std::endl;
         int reps = generate(&data[0]);
 
         std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUT-" + std::to_string(key) + "_" + std::to_string(reps) + ".bmp";

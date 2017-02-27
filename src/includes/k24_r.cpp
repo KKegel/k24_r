@@ -52,11 +52,11 @@ int generate(unsigned char *data){
 
             //smooth
 
-            std::cout << "transform x ... " << std::flush;
+            std::cout << "scale and transform x ... " << std::flush;
             smoth_x(data, &c_h, v);
             std::cout << "finished" << std::endl;
 
-            std::cout << "transform y ... " << std::flush;
+            std::cout << "scale and transform y ... " << std::flush;
             smoth_y(data, &c_h, v);
             std::cout << "finished" << std::endl;
 
@@ -77,7 +77,7 @@ int generate(unsigned char *data){
 
     while (i < reps) {
 
-        std::cout << "transform x & y lines - revision: " << i << " of " << reps << std::endl;
+        std::cout << "... start subroutine SLBR x & y lines - revision: " << i << " of " << reps << std::endl;
 
         std::cout << "start transform x ... " << std::flush;
         smoth_x(data, &c_h, v);
@@ -92,19 +92,19 @@ int generate(unsigned char *data){
 
     //manipulate brightness
 
-    std::cout << "get brightness average ... " << std::flush;
+    std::cout << "get brightness byte average ... " << std::flush;
     int average_bright = c_h.brightness_average(data);
     std::cout << "average = " << average_bright << " ... finished" << std::endl;
 
-    std::cout << "get max color average ... " << std::flush;
+    std::cout << "get max. bright color byte average ... " << std::flush;
     int max_color = c_h.max_bright_pix_average(data);
     std::cout << "average = " << max_color << " ... finished" << std::endl;
 
-    std::cout << "transform brightness ... " << std::flush;
+    std::cout << "adjust brightness ... " << std::flush;
     scale_brightness(data, 50, 50, 50, &c_h, v);
     std::cout << "finished" << std::endl;
 
-    std::cout << "transform colors ... " << std::flush;
+    std::cout << "adjust color values ... " << std::flush;
     clean_colors(data, 20, 15, -35, 20, &c_h, v);
     std::cout << "finished" << std::endl;
 
@@ -114,7 +114,7 @@ int generate(unsigned char *data){
     std::cout << "rebuild stack" << std::endl;
     c_h.index(data);
 
-    std::cout << "start rcdbl subroutine ... " << std::endl;
+    std::cout << "start RCDBL subroutine ... " << std::endl;
     replace_colors(data, c_h.get_colors_by_likelihood(0, (10000/reps*5)), &c_h, v);
     std::cout << "... completed" << std::endl;
 
