@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <chrono>
 
 #include "classes/header/values.h"
 #include "header/bmp_edit.h"
@@ -56,7 +57,8 @@ int main() {
         int key = 0;
 
         int n = 0;
-        while(n < 1500){
+        int up = std::rand() % 1234;
+        while(n < up){
             key = std::rand();
             n++;
         }
@@ -66,6 +68,7 @@ int main() {
         int reps = generate(&data[0]);
 
         std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUT-" + std::to_string(key) + "_" + std::to_string(reps) + ".bmp";
+        //std::string f_name = "k24_rOUT-" + std::to_string(key) + "_" + std::to_string(reps) + ".bmp";
         std::cout << "writing bitmap: " << f_name << std::endl;
 
         std::cout << "open file stream" << std::endl;

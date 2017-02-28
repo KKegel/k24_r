@@ -371,7 +371,16 @@ bool smoth_x(unsigned char *data, color_handler *c_h, values v){
     std::array<unsigned char, 3> n_left_color;
     std::array<unsigned char, 3> n_right_color;
 
+        std::cout << "set variables: done" << std::endl;
+        std::cout << "progress: " << std::endl;
+        std::cout << "." << std::flush;
+        int five_p = v.PHW / 20;
+
     for(int y = 0; y < (v.PHW - 1); y++){
+
+        if(y % five_p == 0){
+            std::cout << "." << std::flush;
+        }
 
         for(int x = 1; x < (v.PHW - 1); x++){
 
@@ -392,6 +401,8 @@ bool smoth_x(unsigned char *data, color_handler *c_h, values v){
 
     }
 
+        std::cout  << "100%" << std::endl;
+
     return true;
 }
 
@@ -403,7 +414,16 @@ bool smoth_y(unsigned char *data, color_handler *c_h, values v){
     std::array<unsigned char, 3> n_top_color;
     std::array<unsigned char, 3> n_bottom_color;
 
+        std::cout << "set variables: done" << std::endl;
+        std::cout << "progress: " << std::endl;
+        std::cout << ".." << std::flush;
+        int five_p = v.PHW / 20;
+
     for(int y = 1; y < (v.PHW - 1); y++){
+
+        if(y % five_p == 0){
+            std::cout << "." << std::flush;
+        }
 
         for(int x = 0; x < (v.PHW - 1); x++){
 
@@ -423,6 +443,8 @@ bool smoth_y(unsigned char *data, color_handler *c_h, values v){
         }
 
     }
+
+        std::cout << "100%" << std::endl;
 
     return true;
 }

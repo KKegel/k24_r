@@ -23,7 +23,7 @@ bool fill_rect(unsigned char *bmp_start, int start_x, int w_x, int start_y, int 
             x++;
         }
 
-        ac_p += (v.PHW * 3 - (start_x * 3 + w_x * 3) + start_x * 3);
+        ac_p += (v.PHW * 3 - w_x * 3);
         x = 0;
         y++;
     }

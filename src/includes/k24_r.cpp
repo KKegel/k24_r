@@ -16,7 +16,7 @@ int generate(unsigned char *data){
 
     //4x4 base pattern:
 
-    std::cout << "generate base pattern ... " << std::flush;
+    std::cout << "generate base pattern... " << std::flush;
 
     for(int y = 0; y < 4; y++){
         for(int x = 0; x < 4; x++){
@@ -52,13 +52,13 @@ int generate(unsigned char *data){
 
             //smooth
 
-            std::cout << "scale and transform x ... " << std::flush;
+            std::cout << "scale and transform x... " << std::endl;
             smoth_x(data, &c_h, v);
-            std::cout << "finished" << std::endl;
+            std::cout << "...finished" << std::endl;
 
-            std::cout << "scale and transform y ... " << std::flush;
+            std::cout << "scale and transform y... " << std::endl;
             smoth_y(data, &c_h, v);
-            std::cout << "finished" << std::endl;
+            std::cout << "...finished" << std::endl;
 
             v.SCATTERING = 0;
         }
@@ -77,34 +77,34 @@ int generate(unsigned char *data){
 
     while (i < reps) {
 
-        std::cout << "... start subroutine SLBR x & y lines - revision: " << i << " of " << reps << std::endl;
+        std::cout << "...start subroutine SLBR x & y lines - revision: " << i << " of " << reps << std::endl;
 
-        std::cout << "start transform x ... " << std::flush;
+        std::cout << "start transform x... " << std::endl;
         smoth_x(data, &c_h, v);
-        std::cout << "finished" << std::endl;
+        std::cout << "...finished" << std::endl;
 
-        std::cout << "start transform y ... " << std::flush;
+        std::cout << "start transform y... " << std::endl;
         smoth_y(data, &c_h, v);
-        std::cout << "finished" << std::endl;
+        std::cout << "...finished" << std::endl;
 
         i++;
     }
 
     //manipulate brightness
 
-    std::cout << "get brightness byte average ... " << std::flush;
+    std::cout << "get brightness byte average... " << std::flush;
     int average_bright = c_h.brightness_average(data);
-    std::cout << "average = " << average_bright << " ... finished" << std::endl;
+    std::cout << "average = " << average_bright << " ...finished" << std::endl;
 
-    std::cout << "get max. bright color byte average ... " << std::flush;
+    std::cout << "get max. bright color byte average... " << std::flush;
     int max_color = c_h.max_bright_pix_average(data);
-    std::cout << "average = " << max_color << " ... finished" << std::endl;
+    std::cout << "average = " << max_color << " ...finished" << std::endl;
 
-    std::cout << "adjust brightness ... " << std::flush;
+    std::cout << "adjust brightness... " << std::flush;
     scale_brightness(data, 50, 50, 50, &c_h, v);
     std::cout << "finished" << std::endl;
 
-    std::cout << "adjust color values ... " << std::flush;
+    std::cout << "adjust color values... " << std::flush;
     clean_colors(data, 20, 15, -35, 20, &c_h, v);
     std::cout << "finished" << std::endl;
 
@@ -114,9 +114,9 @@ int generate(unsigned char *data){
     std::cout << "rebuild stack" << std::endl;
     c_h.index(data);
 
-    std::cout << "start RCDBL subroutine ... " << std::endl;
+    std::cout << "start RCDBL subroutine... " << std::endl;
     replace_colors(data, c_h.get_colors_by_likelihood(0, (10000/reps*5)), &c_h, v);
-    std::cout << "... completed" << std::endl;
+    std::cout << "...completed" << std::endl;
 
     return reps;
 }

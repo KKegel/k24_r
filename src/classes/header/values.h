@@ -5,7 +5,7 @@
 #ifndef K24_R_VALUES_H
 #define K24_R_VALUES_H
 
-#include <profile.h>
+//#include <profile.h>
 
 class values {
 

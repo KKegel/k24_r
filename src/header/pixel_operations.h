@@ -6,6 +6,7 @@
 #define K24_R_PIXEL_OPERATIONS_H
 
 #include <stdio.h>
+#include <string>
 #include <array>
 #include <time.h>
 
