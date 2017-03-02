@@ -16,7 +16,7 @@ int generate(unsigned char *data){
 
     //4x4 base pattern:
 
-    std::cout << "generate base pattern... " << std::flush;
+    std::cout << "generate base pattern... " << std::endl;
 
     int color1 = (std::rand() % 6) + 10;
     int color2 = c_h.get_complement_color(color1);
@@ -24,97 +24,120 @@ int generate(unsigned char *data){
     double rela1 = c_h.get_color_relation(color2, color1);
     double rela2 = 1 - rela1;
 
-    int fac_1 = (int) rela1 * 12;
-    int fac_2 = (int) rela2 * 12;
-
-    int c[16];
-
-    int cc1 = 0, cc2 = 0;
-
-        int i = 0;
-
-        while(i < 16){
-
-            int k = (std::rand() % 12) - rela2;
-
-            if(i == 6 && (cc1 < 2 || cc2 < 2)) {
-
-                if (cc1 < 2) {
-                    c[i] = color1;
-                    cc1++;
-                } else {
-                    c[i] = color2;
-                    cc2++;
-                }
-
-            }else if(i == 8 && (cc1 < 3 || cc2 < 3)){
-
-                if(cc1 < 3){
-                    c[i] = color1;
-                    cc1++;
-                }else{
-                    c[i] = color2;
-                    cc2++;
-                }
-
-            }else if(i == 10 && (cc1 < 4 || cc2 < 4)){
-
-                if(cc1 < 4){
-                    c[i] = color1;
-                    cc1++;
-                }else{
-                    c[i] = color2;
-                    cc2++;
-                }
-
-            }else if(i == 13 && (cc1 < 5 || cc2 < 5)){
-
-                if(cc1 < 5){
-                    c[i] = color1;
-                    cc1++;
-                }else{
-                    c[i] = color2;
-                    cc2++;
-                }
-
-            }else {
-
-                if (k >= 0) {
-                    c[i] = color1;
-                    cc1++;
-                } else {
-                    c[i] = color2;
-                    cc2++;
-                }
-            }
-            i++;
-        }
+    int fac_1 = (int) (rela1 * 12);
+    int fac_2 = (int) (rela2 * 12);
 
     std::cout << "color 1: " << color1 << std::endl;
     std::cout << "color 2: " << color2 << std::endl;
     std::cout << "relation 1: " << rela1 << std::endl;
 
-    i = 0;
+    int i = 0;
 
-    for(int y = 0; y < 4; y++){
-        for(int x = 0; x < 4; x++){
+    int c_white = 0;
+    int c_black = 0;
+
+    int c_vals[16];
+
+    i = 0;
+    while(i < 16){
 
             int r = std::rand() % 20;
+
             if( r < 2){
-                color = c_h.random_color(seed, v.BLACK);
+
+                if(c_black <= 1) {
+                    c_vals[i] = v.BLACK;
+                    c_black++;
+                }else{
+                    i--;
+                }
+
             }else if( r < 6){
-                color = c_h.random_color(seed, v.WHITE);
+
+                if(c_white <= 2) {
+                    c_vals[i] = v.WHITE;
+                    c_white++;
+                }else{
+                    i--;
+                }
+
             }else if( r < 8){
-                color = c_h.random_color(seed, v.GREY);
+
+                c_vals[i] = v.GREY;
+
+            }else if( r < 8 + fac_1){
+
+                c_vals[i] = color1;
+
             }else{
-                color = c_h.hue(c[i]);
-                i++;
+
+                c_vals[i] = color2;
+            }
+
+            i++;
+    }
+
+    int r_az_col1 = 0;
+    int r_az_col2 = 0;
+
+    for(int k = 0; k < 16; k++){
+
+        if(c_vals[k] == color1){
+            r_az_col1++;
+        }else if(c_vals[k] == color2){
+            r_az_col2++;
+        }
+    }
+
+    std::cout << "amount color 1: " << r_az_col1 << std::endl;
+    std::cout << "amount color 2: " << r_az_col2 << std::endl;
+
+    int diff_col1 = r_az_col1 - fac_1;
+    int diff_col2 = r_az_col2 - fac_2;
+
+    i = 0;
+
+    while(i > (diff_col1 + 1) || r_az_col1 == 0){
+        int r = (std::rand() % 16);
+        c_vals[r] = color1;
+        r_az_col1++;
+        i--;
+    }
+
+    i = 0;
+    while(i > (diff_col2 + 1) || r_az_col2 == 0){
+        int r = (std::rand() % 16);
+        c_vals[r] = color2;
+        r_az_col2++;
+        i--;
+    }
+
+    //todo wenn zu viel Farbe (diff positiv ist) behandeln
+
+    i = 0;
+
+    for(int y = 0; y < 4; y++) {
+        for (int x = 0; x < 4; x++) {
+
+            if(c_vals[i] == v.BLACK){
+                color = c_h.random_color(seed, v.BLACK);
+            }else if(c_vals[i] == v.GREY){
+                color = c_h.random_color(seed, v.WHITE);
+            }else if(c_vals[i] == v.WHITE){
+                color = c_h.random_color(seed, v.WHITE);
+            }else if(c_vals[i] == color1){
+                color = c_h.hue(color1);
+            }else{
+                color = c_h.hue(color2);
             }
 
             fill_rect(data, v.PHW / 4 * x, v.PHW / 4, v.PHW / 4 * y, v.PHW / 4, color[0], color[1], color[2], v);
             c_h.add_to_stack(color[0], color[1], color[2]);
+
+            i++;
         }
     }
+
 
     std::cout << "finished" << std::endl;
 
@@ -151,7 +174,7 @@ int generate(unsigned char *data){
     //smoth again
 
     i = 0;
-    int reps = (rand() % 50) + 20;
+    int reps = (rand() % 35) + 35;
     std::cout << "repetitions: " << reps << std::endl;
 
     while (i < reps) {
@@ -180,7 +203,8 @@ int generate(unsigned char *data){
     std::cout << "average = " << max_color << " ...finished" << std::endl;
 
     std::cout << "adjust brightness... " << std::flush;
-    scale_brightness(data, 70, 70, 70, &c_h, v);
+    int bright_plus = 150 - average_bright;
+    scale_brightness(data, bright_plus, bright_plus, bright_plus, &c_h, v);
     std::cout << "finished" << std::endl;
 
     std::cout << "adjust color values... " << std::flush;

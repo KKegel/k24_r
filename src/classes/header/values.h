@@ -43,15 +43,15 @@ public:
     const unsigned char D_RED[3] = {0x00, 0x00, 0xa0};
 
     const unsigned char O_GREEN[3] = {0x00, 255, 0x00};
-    const unsigned char U_GREEN[3] = {0x90, 0xff, 0x70};
+    const unsigned char U_GREEN[3] = {0xa0, 0xff, 0x70};
     const unsigned char D_GREEN[3] = {0x00, 0xa0, 0x00};
 
     const unsigned char O_BLUE[3] = {255, 0x00, 0x00};
-    const unsigned char U_BLUE[3] = {0xff, 0x70, 0x50};
+    const unsigned char U_BLUE[3] = {0xff, 0xa0, 0x80};
     const unsigned char D_BLUE[3] = {0xa0, 0x00, 0x00};
 
     const unsigned char O_ORANGE[3] = {0x00, 175, 255};
-    const unsigned char U_ORANGE[3] = {0x01, 0x78, 0xff};
+    const unsigned char U_ORANGE[3] = {0x01, 0xa0, 0xff};
     const unsigned char D_ORANGE[3] = {0x00, 0x50, 0xc0};
 
     const unsigned char O_VIOLETT[3] = {0x55, 0x00, 0x55};

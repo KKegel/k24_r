@@ -65,6 +65,10 @@ stdio.h
 -
 array
 -
+vector
+-
+math.h
+-
 time.h
 -
 ../classes/header/values.h

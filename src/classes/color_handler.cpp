@@ -309,7 +309,7 @@ std::array<unsigned char, 3> color_handler::hue(int color) {
         c[2] = (rand() % (v->U_GREEN[2] - v->D_GREEN[2])) + v->D_GREEN[2];
     }
 
-    int bright = (std::rand() % 100) - 50;
+    int bright = (std::rand() % 180) - 90;
 
     return  scale_color(bright, bright, bright, c);
 }
