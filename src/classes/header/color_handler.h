@@ -22,7 +22,8 @@ public:
     bool init(values *val);
 
     std::array<unsigned char, 3> random_color(int seed, int type);
-    std::array<unsigned char,  3> random_stack_color();
+    std::array<unsigned char, 3> random_stack_color();
+    std::array<unsigned char, 3> hue(int color);
 
     bool add_to_stack(unsigned char r, unsigned char g, unsigned char b);
     bool clear_stack();
@@ -36,7 +37,13 @@ public:
 
     int brightness_average(unsigned char *data);
     int max_bright_pix_average(unsigned char *data);
+
     bool scale_color(unsigned char *data, int x, int y, int fac_r, int fac_g, int fac_b);
+    std::array<unsigned char, 3> scale_color(int fac_r, int fac_g, int fac_b, std::array<unsigned char, 3> color);
+    bool optimize_color(unsigned char *data, int color);
+
+    int get_complement_color(int color);
+    double get_color_relation(int col_from, int col_to);
 
 private:
 

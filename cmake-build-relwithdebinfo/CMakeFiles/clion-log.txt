@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "CodeBlocks - Unix Makefiles" /Users/karlkegel/CLionProjects/k24_r
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/karlkegel/CLionProjects/k24_r/cmake-build-relwithdebinfo

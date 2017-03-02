@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <array>
+#include <vector>
 #include <time.h>
 
 #include "../classes/header/values.h"

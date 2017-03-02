@@ -15,15 +15,17 @@ bool fill_rect(unsigned char *bmp_start, int start_x, int w_x, int start_y, int 
 
         while (x < w_x){
 
-            *(ac_p) = r;
-            *(++ac_p) = g;
-            *(++ac_p) = b;
+            *ac_p = r;
+            ac_p++;
+            *ac_p = g;
+            ac_p++;
+            *ac_p = b;
             ac_p++;
 
             x++;
         }
 
-        ac_p += (v.PHW * 3 - w_x * 3);
+        ac_p = ac_p + v.PHW * 3 - w_x * 3;
         x = 0;
         y++;
     }

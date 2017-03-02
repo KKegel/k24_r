@@ -147,3 +147,22 @@ std::vector<std::array<unsigned char, 6>> color_corpus::colors_by_likelihood(int
 
     return colors;
 }
+
+std::vector<std::array<unsigned char, 4>> color_corpus::get_weighted_color_stack() {
+
+    std::vector<std::array<unsigned char, 4>> stack;
+    std::array<unsigned char, 4> elem;
+
+    for(int i = 0; i < color_stack.size(); i++){
+
+        elem[0] = color_stack[i][0];
+        elem[1] = color_stack[i][1];
+        elem[2] = color_stack[i][2];
+        elem[3] = likelihood[i];
+
+        stack.push_back(elem);
+
+    }
+
+    return stack;
+}

@@ -22,6 +22,7 @@ public:
     std::array<unsigned char,  3> weighted_stack_color();
 
     std::vector<std::array<unsigned char, 6>> colors_by_likelihood(int down, int up);
+    std::vector<std::array<unsigned char, 4>> get_weighted_color_stack();
 
     bool add_to_stack(unsigned char r, unsigned char g, unsigned char b);
 

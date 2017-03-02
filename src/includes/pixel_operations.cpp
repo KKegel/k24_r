@@ -296,8 +296,6 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
         }
 
-        //std::cout << "reached line end " << y << std::endl;
-
         if(y % 2 == 0) {
             y += (square_corner_diff - 1);
         }else{
@@ -306,7 +304,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
     }
 
-    std::cout << " ... finished" << std::endl;
+    std::cout << " ...finished" << std::endl;
 
     return true;
 }
@@ -324,7 +322,7 @@ bool remove_single_dots(unsigned char *data, color_handler *c_h, values v){
 
     for(int y = 1; y < diff; y++){
 
-        std::cout << "\ry: " << y << "|" << (v.PHW - 1) << std::flush;
+        std::cout << "\ry: " << y << " of " << (v.PHW - 1) << std::flush;
 
         for(int x = 1; x < diff; x++){
 
@@ -733,7 +731,7 @@ bool replace_colors(unsigned char *data, std::vector<std::array<unsigned char, 6
         }
     }
 
-    std::cout << " ... finished" << std::endl;
+    std::cout << " ...finished" << std::endl;
 
     return true;
 }

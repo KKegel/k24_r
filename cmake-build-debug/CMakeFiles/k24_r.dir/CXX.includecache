@@ -45,7 +45,9 @@ values.h
 /Users/karlkegel/CLionProjects/k24_r/src/header/bmp_edit.h
 
 /Users/karlkegel/CLionProjects/k24_r/src/classes/header/values.h
-profile.h
+vector
+-
+iostream
 -
 
 /Users/karlkegel/CLionProjects/k24_r/src/header/bmp_edit.h
@@ -77,6 +79,8 @@ pixel_operations.h
 /Users/karlkegel/CLionProjects/k24_r/src/header/pixel_operations.h
 stdio.h
 -
+string
+-
 array
 -
 time.h
@@ -102,6 +106,8 @@ bmp_edit.h
 
 /Users/karlkegel/CLionProjects/k24_r/src/main.cpp
 iostream
+-
+chrono
 -
 classes/header/values.h
 /Users/karlkegel/CLionProjects/k24_r/src/classes/header/values.h
