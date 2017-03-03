@@ -112,7 +112,51 @@ int generate(unsigned char *data){
         i--;
     }
 
-    //todo wenn zu viel Farbe (diff positiv ist) behandeln
+    r_az_col1 = 0;
+    r_az_col2 = 0;
+
+    for(int k = 0; k < 16; k++){
+
+        if(c_vals[k] == color1){
+            r_az_col1++;
+        }else if(c_vals[k] == color2){
+            r_az_col2++;
+        }
+    }
+
+    diff_col1 = r_az_col1 - fac_1;
+    diff_col2 = r_az_col2 - fac_2;
+
+    int s_exec = 0;
+
+    while(i < (diff_col1 - 1) || r_az_col1 == 0){
+        int r = (std::rand() % 16);
+        if(c_vals[r] == color1) {
+            r_az_col1--;
+            i+=2;
+            c_vals[r] = color2;
+        }
+        s_exec++;
+        if(s_exec >= 1000){
+            break;
+        }
+    }
+
+    s_exec = 0;
+    i = 0;
+
+    while(i < (diff_col2 + 1) || r_az_col2 == 0){
+        int r = (std::rand() % 16);
+        if(c_vals[r] == color2) {
+            r_az_col2--;
+            i+=2;
+            c_vals[r] = color1;
+        }
+        s_exec++;
+        if(s_exec >= 1000){
+            break;
+        }
+    }
 
     i = 0;
 
