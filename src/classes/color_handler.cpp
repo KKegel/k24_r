@@ -309,7 +309,7 @@ std::array<unsigned char, 3> color_handler::hue(int color) {
         c[2] = (rand() % (v->U_GREEN[2] - v->D_GREEN[2])) + v->D_GREEN[2];
     }
 
-    int bright = (std::rand() % 180) - 90;
+    int bright = (std::rand() % 300) - 150;
 
     return  scale_color(bright, bright, bright, c);
 }
@@ -566,6 +566,24 @@ bool color_handler::optimize_color(unsigned char *data, int color) {
     std::cout << " ...finished" << std::endl;
 
     return true;
+}
+
+std::array<unsigned char, 3> color_handler::scale_color_random(
+        std::array<unsigned char, 3> color, int total, int ne_diff, int percent, int max, int curr){
+
+    if(curr < max) {
+
+        if ((std::rand() % 100) < percent) {
+
+            int a1 = (std::rand() % total) - ne_diff;
+            int a2 = (std::rand() % total) - ne_diff;
+            int a3 = (std::rand() % total) - ne_diff;
+
+            color = scale_color(a1, a2, a3, color);
+        }
+    }
+
+    return color;
 }
 
 

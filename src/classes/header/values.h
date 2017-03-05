@@ -56,7 +56,7 @@ public:
 
     const unsigned char O_VIOLETT[3] = {0x55, 0x00, 0x55};
     const unsigned char U_VIOLETT[3] = {0xa0, 0x01, 0xa0};
-    const unsigned char D_VIOLETT[3] = {0x40, 0x00, 0x20};
+    const unsigned char D_VIOLETT[3] = {0x80, 0x00, 0x40};
 
     const unsigned char O_YELLOW[3] = {0x00, 255, 255};
     const unsigned char U_YELLOW[3] = {0x01, 0xff, 0xff};

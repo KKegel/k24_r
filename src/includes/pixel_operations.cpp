@@ -46,6 +46,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                                 color = c_h -> random_stack_color();
                             }
 
+                            color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
+
                             fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
                             x++;
 
@@ -68,6 +70,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                             }else{
                                 color = c_h -> random_stack_color();
                             }
+
+                            color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
 
                             fill_rect(data, x, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
                         }
@@ -92,6 +96,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                                 color = c_h -> random_stack_color();
                             }
 
+                            color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
+
                             fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2],v);
                             x++;
 
@@ -115,6 +121,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                                 color = c_h -> random_stack_color();
                             }
 
+                            color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
+
                             fill_rect(data, x, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2],v);
                         }
                         f++;
@@ -126,6 +134,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                 if(r < v.SCATTERING){
                     color = c_h -> random_stack_color();
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
                     fill_rect(data, x, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
                 }
 
@@ -133,6 +142,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                 if(r < v.SCATTERING){
                     color = c_h -> random_stack_color();
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
                     fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
                 }
 
@@ -140,6 +150,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                 if(r < v.SCATTERING){
                     color = c_h -> random_stack_color();
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
                     fill_rect(data, x, new_sqare_diff, y - new_sqare_diff +1 , new_sqare_diff, color[0], color[1], color[2],v);
                 }
 
@@ -147,6 +158,7 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
 
                 if(r < v.SCATTERING){
                     color = c_h -> random_stack_color();
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
                     fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2],v);
                 }
 
@@ -163,6 +175,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                         } else{
                             color = c_h -> random_stack_color();
                         }
+
+                        color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
 
                         fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
                         x++;
@@ -182,6 +196,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                         } else{
                             color = c_h -> random_stack_color();
                         }
+
+                        color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
 
                         fill_rect(data, x, new_sqare_diff, y, new_sqare_diff, color[0], color[1], color[2],v);
 
@@ -203,6 +219,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                             color = c_h -> random_stack_color();
                         }
 
+                        color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
+
                         fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2],v);
                         x++;
 
@@ -221,6 +239,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                         }else{
                             color = c_h -> random_stack_color();
                         }
+
+                        color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
 
                         fill_rect(data, x, new_sqare_diff, y - new_sqare_diff + 1, new_sqare_diff, color[0], color[1], color[2],v);
 
@@ -241,6 +261,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                         color = c_h -> random_stack_color();
                     }
 
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
+
                     fill_rect(data, x, new_sqare_diff, y , new_sqare_diff, color[0], color[1], color[2],v);
 
                 }else{ //square top
@@ -253,6 +275,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                     } else {
                         color = c_h -> random_stack_color();
                     }
+
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
 
                     fill_rect(data, x, new_sqare_diff, y - new_sqare_diff + 1 , new_sqare_diff, color[0], color[1], color[2],v);
 
@@ -271,6 +295,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                         color = c_h -> random_stack_color();
                     }
 
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
+
                     fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y , new_sqare_diff, color[0], color[1], color[2],v);
 
                 }else{ //square top
@@ -283,6 +309,8 @@ bool redouble_resolution(unsigned char *data, int resolution, color_handler *c_h
                     } else {
                         color = c_h -> random_stack_color();
                     }
+
+                    color = c_h->scale_color_random(color, 60, 30, 20, 50, new_resolution);
 
                     fill_rect(data, x - new_sqare_diff + 1, new_sqare_diff, y - new_sqare_diff + 1 , new_sqare_diff, color[0], color[1], color[2],v);
 

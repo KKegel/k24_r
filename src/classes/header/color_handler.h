@@ -41,6 +41,7 @@ public:
     bool scale_color(unsigned char *data, int x, int y, int fac_r, int fac_g, int fac_b);
     std::array<unsigned char, 3> scale_color(int fac_r, int fac_g, int fac_b, std::array<unsigned char, 3> color);
     bool optimize_color(unsigned char *data, int color);
+    std::array<unsigned char, 3> scale_color_random(std::array<unsigned char, 3> color, int total, int ne_diff, int percent, int max, int curr);
 
     int get_complement_color(int color);
     double get_color_relation(int col_from, int col_to);
