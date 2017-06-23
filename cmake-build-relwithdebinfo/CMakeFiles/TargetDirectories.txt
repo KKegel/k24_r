@@ -1,3 +1,0 @@
-/Users/karlkegel/CLionProjects/k24_r/cmake-build-relwithdebinfo/CMakeFiles/edit_cache.dir
-/Users/karlkegel/CLionProjects/k24_r/cmake-build-relwithdebinfo/CMakeFiles/rebuild_cache.dir
-/Users/karlkegel/CLionProjects/k24_r/cmake-build-relwithdebinfo/CMakeFiles/k24_r.dir
