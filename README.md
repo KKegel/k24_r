@@ -6,7 +6,7 @@ the generated images are looking expressive abstract but interesting.
 the algorithm takes care of
 * color distribution
 * contrast
-* complmenet colors
+* complement colors
 * complement proportion
 * color excitement
 * shading
