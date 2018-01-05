@@ -43,7 +43,7 @@ const unsigned char head[54] = {  bftype[0], bftype[1],
 unsigned char data[8192*8192*3]; //height (y), width (x), color bytes
 values v;
 
-int main() {
+int main(int argn, char *argv[]) {
 
     for(int i = 0; i < 1; i++) {
 
@@ -67,7 +67,7 @@ int main() {
 
         int reps = generate(&data[0]);
 
-        std::string f_name = "/Users/karlkegel/Documents/test_bmp/k24_rOUT-" + std::to_string(key) + "_" + std::to_string(reps) + ".bmp";
+        std::string f_name = *argv[1] + std::to_string(key) + "_" + std::to_string(reps) + ".bmp";
         //std::string f_name = "k24_rOUT-" + std::to_string(key) + "_" + std::to_string(reps) + ".bmp";
         std::cout << "writing bitmap: " << f_name << std::endl;
 
